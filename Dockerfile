@@ -38,6 +38,8 @@ ADD . /usr/src/wordpress
 RUN cp /usr/src/wordpress/docker-apache.conf /etc/apache2/sites-available/wordpress.conf \
 	&& a2dissite 000-default \
 	&& a2ensite wordpress
+RUN rsync --archive --one-file-system --quiet /usr/src/wordpress/ ./
+RUN chown -R www-data:www-data .
 
 ENTRYPOINT ["/usr/src/wordpress/docker-entrypoint.sh"]
 EXPOSE 80
