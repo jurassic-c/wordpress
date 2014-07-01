@@ -39,7 +39,9 @@ RUN cp /usr/src/wordpress/docker-apache.conf /etc/apache2/sites-available/wordpr
 	&& a2dissite 000-default \
 	&& a2ensite wordpress
 RUN rsync --archive --one-file-system --quiet /usr/src/wordpress/ ./
-RUN chown -R www-data:www-data .
+RUN find ./ -type d -exec chmod 755 {} \;
+RUN find ./ -type f -exec chmod 644 {} \;
+RUN chown -R www-data:www-data ./wp-content
 
 ENTRYPOINT ["/usr/src/wordpress/docker-entrypoint.sh"]
 EXPOSE 80
