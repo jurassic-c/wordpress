@@ -115,5 +115,6 @@ $mysql->close();
 EOPHP
 
 chown -R "$APACHE_RUN_USER:$APACHE_RUN_GROUP" .
+rm -f index.html
 
 exec "$@"
